@@ -10,7 +10,7 @@ export default function Video({id}){
     const [disabledPlay,setDisabledPlay]=useState(true)
     const [disabledDowload,setDisabledDowload]=useState(true)
 
-    let navigator=useNavigate()
+    let navigate=useNavigate()
 
 
    
@@ -22,15 +22,15 @@ export default function Video({id}){
 
     
     
+   
 
-
-    const init= async(contrains)=>{
+    const init= async(constraints)=>{
 
         try{
 
-            const stream= await navigator.mediaDevices.getUserMedia(contrains)
+            const stream= await navigator.mediaDevices.getUserMedia(constraints)
 
-            handelSucces(stream)
+            handleSuccess(stream)
 
         }catch(e){
             console.log(e)
@@ -40,7 +40,7 @@ export default function Video({id}){
 
     }
 
-    const handelSucces=(stream)=>{
+    const handleSuccess=(stream)=>{
 
        setDisabledRec((disabledRec)=>!disabledRec)
 
@@ -60,16 +60,15 @@ export default function Video({id}){
 
        
 
-        const contrains={
-            video:{
-                width:400,height:400
-            },
-            audio:true
-        }
+        const constraints = {
+            video: {
+              width: 500, height: 300
+            }
+          }
 
-        console.log('using media',contrains)
+        console.log('using media',constraints)
 
-        await init(contrains)
+        await init(constraints)
 
     }
 
@@ -174,7 +173,7 @@ export default function Video({id}){
         
         
         putPreguntas(e.target.id)
-        navigator(`/preguntas/${String(Number(e.target.id)+1)}`,{ replace: true })
+        navigate(`/preguntas/${String(Number(e.target.id)+1)}`,{ replace: true })
         refreshPage()
     
 
